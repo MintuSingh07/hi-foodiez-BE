@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Number,
-        default: new Date.now()
+        default: new Date()
     }
 });
 

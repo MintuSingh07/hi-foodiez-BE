@@ -1,13 +1,18 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
+const cors = require('cors');
 const Menu = require("./schema/Menu.model");
 const Order = require('./schema/Order.model');
+const bodyParser = require("body-parser");
 const app = express()
 const PORT = 8000
 require('dotenv').config();
 
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/hifoodiez" || process.env.MONGODB)
+mongoose.connect(process.env.MONGODB)
   .then(() => console.log("DB connected sucessfully"))
   .catch((err) => console.log("Error is:", err))
 
@@ -20,11 +25,12 @@ app.get("/menu", async (req, res) => {
 
 // Order
 app.post("/order", async (req, res) => {
+  console.log(req.body);
   const { tb_no, selectedItems } = req.body;
 
   try {
     const requestedOrder = await Order.create({
-      tb_no,
+      tableNumber: tb_no,
       items: selectedItems
     });
     requestedOrder.save()
