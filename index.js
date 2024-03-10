@@ -29,14 +29,14 @@ app.post("/order", async (req, res) => {
   const { tb_no, selectedItems } = req.body;
 
   try {
-    const requestedOrder = await Order.create({
+    const requestedOrder = new Order({
       tableNumber: tb_no,
       items: selectedItems
     });
     requestedOrder.save()
-    res.status(200).json({message: "Order Placed Sucessfully", tb_no, selectedItems})
+    res.status(200).json({ message: "Order Placed Sucessfully", tb_no, selectedItems })
   } catch (error) {
-    res.status(400).json({error: "Error is: ", error})
+    res.status(400).json({ error: "Error is: ", error })
   }
 })
 

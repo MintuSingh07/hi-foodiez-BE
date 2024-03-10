@@ -5,10 +5,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    items: {
-        type: [String],
-        require: true
-    },
+    items: [{
+        name: String,
+        quantity: Number
+    }],
     createdAt: {
         type: Number,
         default: new Date()
