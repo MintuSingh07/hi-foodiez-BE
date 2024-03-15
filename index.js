@@ -4,9 +4,10 @@ const cors = require('cors');
 const Menu = require("./schema/Menu.model");
 const Order = require('./schema/Order.model');
 const bodyParser = require("body-parser");
-const app = express()
-const PORT = 8000
 require('dotenv').config();
+const app = express()
+const PORT = process.env.PORT || 8000
+
 
 app.use(express.json());
 app.use(cors());
